@@ -1,0 +1,64 @@
+<div>
+   <form [formGroup]="billForm" (ngSubmit)="billSubmit()">
+      <mat-form-field class="col-md-12">
+          <input matInput placeholder="Bill No" formControlName="bill_No"  value="">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+          <mat-select placeholder="Favorite food" formControlName="product_Name" >
+            <mat-option *ngFor="let food of productData" [value]="food.productName"  (onSelectionChange)="itemDetail(food.$key, food.productName, food.productId, food.productQunatity, food.productPrice)">
+              {{food.productName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    <div class="row">    
+        <div class="col-md-12">
+            <div class="row">  
+              <div class="col-md-6">
+                    <mat-form-field class="col-md-12">
+                        <input matInput placeholder="Quantity" formControlName="billing_Quantity"  (keyup)="quantity($event)" value="">
+                    </mat-form-field>
+              </div>
+              <div class="col-md-6 text-right">
+                Available  {{Quantity}}
+              </div>
+            </div>  
+        </div>
+      </div>
+
+      <div class="row">    
+          <div class="col-md-12">
+              <div class="row">  
+                <div class="col-md-6">
+                      <mat-form-field class="col-md-12">
+                          <input matInput placeholder="Price per Item" formControlName="billing_Price" [value]="price" (change)="priceChange($event)">
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6 text-right">
+                  *Price Per Item  {{price}}
+                </div>
+              </div>  
+          </div>
+        </div>
+
+        <div row>
+            <div class="col-md-12">
+         Total {{totalBillingPrice | currency}}
+           </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-6 text-center">
+                      <button mat-button color="primary" type="submit">Submit</button>
+                     
+                  </div>
+                  <div class="col-md-6 text-center">
+                      <button mat-button color="primary">Reset</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+   </form>
+</div>
